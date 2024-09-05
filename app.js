@@ -3,6 +3,9 @@ const endpoint = process.env.COSMOS_DB_ENDPOINT;
 const key = process.env.COSMOS_DB_KEY;
 const client = new CosmosClient({ endpoint, key });
 
+context.log('Current Time:', now.toISOString());
+context.log('Querying for events from:', oneHourAgo.toISOString());
+
 module.exports = async function (context, myTimer) {
     const databaseId = 'RTP';
     const containerId = 'pageanalytics'; // Raw events container

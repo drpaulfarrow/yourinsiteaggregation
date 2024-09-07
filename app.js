@@ -1,12 +1,10 @@
 const { CosmosClient } = require('@azure/cosmos');
+
 const endpoint = process.env.COSMOS_DB_ENDPOINT;
 const key = process.env.COSMOS_DB_KEY;
 const client = new CosmosClient({ endpoint, key });
 
 module.exports = async function (context, myTimer) {
-    
-    context.log('Current Time:', now.toISOString());
-    context.log('Querying for events from:', oneHourAgo.toISOString());
     const databaseId = 'RTP';
     const containerId = 'pageanalytics'; // Raw events container
     const aggContainerId = 'pageanalytics_aggregated'; // Aggregated data container
@@ -17,6 +15,9 @@ module.exports = async function (context, myTimer) {
 
     const now = new Date();
     const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
+
+    context.log('Current Time:', now.toISOString());
+    context.log('Querying for events from:', oneHourAgo.toISOString());
 
     try {
         // Query for raw events from the last hour
